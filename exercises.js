@@ -88,6 +88,7 @@ function updatePassword(user, newPassword) {
   // replace the existing password on the user object with the value of newPassword
   // return the object
   user.password = newPassword;
+  return user;
 }
 
 function addFriend(user, newFriend) {
@@ -103,6 +104,10 @@ function setUsersToPremium(users) {
   // each user object has the property 'isPremium'
   // set each user's isPremium property to true
   // return the users array
+  for (var i = 0; i < users.length; i++) {
+    users[i].isPremium = true;
+  }
+  return users;
 }
 
 function sumUserPostLikes(user) {
@@ -111,6 +116,11 @@ function sumUserPostLikes(user) {
   // each post object has an integer property called 'likes'
   // sum together the likes from all the post objects
   // return the sum
+  var sumOfLikes = 0;
+  for (var i = 0; i < user.posts.length; i++) {
+    sumOfLikes += user.posts[i].likes;
+  }
+  return sumOfLikes;
 }
 
 function addCalculateDiscountPriceMethod(storeItem) {
@@ -121,6 +131,12 @@ function addCalculateDiscountPriceMethod(storeItem) {
   // price -> 20
   // discountPercentage -> .2
   // discountPrice = 20 - (20 * .2)
+  storeItem.calculateDiscountPrice = function() {
+    var discount = this.price * this.discountPercentage;
+    var discountPrice = this.price - discount;
+    return discountPrice;
+  };
+  return storeItem;
 }
 
 // Do not modify code below this line.
